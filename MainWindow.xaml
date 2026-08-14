@@ -1,0 +1,50 @@
+﻿<Window x:Class="DDNetTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="DDNet Clan Tracker" Height="650" Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource SystemControlPageBackgroundChromeLowBrush}">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="DDNet Clan Tracker" FontSize="26" FontWeight="SemiBold"/>
+            <TextBlock Text="Отслеживание игроков и кланов в реальном времени" Foreground="Gray" FontSize="13" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Поисковая строка -->
+        <TextBox Grid.Row="1" x:Name="SearchBox" 
+                 ui:ControlHelper.PlaceholderText="Поиск по нику или клану..." 
+                 TextChanged="SearchBox_TextChanged" 
+                 Margin="0,0,0,16" Height="36" FontSize="14"/>
+
+        <!-- Таблица игроков -->
+        <DataGrid Grid.Row="2" x:Name="PlayersDataGrid" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  RowHeight="32">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Никнейм" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Клан" Binding="{Binding Clan}" Width="*"/>
+                <DataGridTextColumn Header="Сервер" Binding="{Binding Server}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Подвал / Статус -->
+        <Grid Grid.Row="3" Margin="0,12,0,0">
+            <TextBlock x:Name="StatusText" Text="Загрузка данных..." Foreground="Gray" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="CountText" Text="Игроков: 0" Foreground="Gray" HorizontalAlignment="Right"/>
+        </Grid>
+    </Grid>
+</Window>
